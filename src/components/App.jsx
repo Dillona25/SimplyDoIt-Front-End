@@ -2,12 +2,14 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import Nav from "../components/Nav";
 import TaskModal from "./TaskModal";
+import Todo from "./Todo";
 import ProfileModal from "./ProfileModal";
-import TaskTemp from "../components/TaskTemp";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+uuidv4();
 
 function App() {
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState([]);
 
   const toggleTaskModal = () => {
     setActiveModal("taskModal");
@@ -21,18 +23,30 @@ function App() {
     setActiveModal("");
   };
 
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (todo) => {
+    setTodos([
+      ...todos,
+      { id: uuidv4(), task: todo, complete: false, isEditing: false },
+    ]);
+  };
+
   return (
     <div className="App max-w-[700px] m-auto">
       <Header toggleProfileModal={toggleProfileModal} />
-      <Main />
+      {/* <Main /> */}
       <Nav toggleTaskModal={toggleTaskModal} />
       {activeModal === "taskModal" && (
-        <TaskModal toggleCloseModal={toggleCloseModal} />
+        <TaskModal toggleCloseModal={toggleCloseModal} addTodo={addTodo} />
       )}
+      {todos.map((todo, index) => (
+        <Todo task={todo} key={index} />
+      ))}
+
       {activeModal === "profileModal" && (
         <ProfileModal toggleCloseModal={toggleCloseModal} />
       )}
-      <TaskTemp />
     </div>
   );
 }

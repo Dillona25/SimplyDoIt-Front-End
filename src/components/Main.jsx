@@ -1,4 +1,5 @@
 import ToDoLogo from "../images/ToDoLogo.svg";
+import { useState } from "react";
 
 const Main = () => {
   return (
@@ -13,9 +14,7 @@ const Main = () => {
             Press + to add a task
           </p>
         </div>
-        <div>
-          <ul className="flex flex-col gap-[20px] list-none p-0 m-0 mt-[20px]"></ul>
-        </div>
+        <div></div>
       </section>
     </main>
   );

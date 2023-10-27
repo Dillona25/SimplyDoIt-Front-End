@@ -1,4 +1,14 @@
-const TaskModal = ({ toggleCloseModal }) => {
+import { useState } from "react";
+
+const TaskModal = ({ toggleCloseModal, addTodo }) => {
+  const [value, setValue] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTodo(value);
+    toggleCloseModal();
+    setValue("");
+  };
   return (
     <div
       id="add-task-modal"
@@ -9,15 +19,20 @@ const TaskModal = ({ toggleCloseModal }) => {
           className="bg-close top-5 right-5 position: absolute w-[30px] h-[30px]"
           onClick={toggleCloseModal}
         ></button>
-        <form className="flex flex-col gap-[10px] w-[300px] mt-[20px]">
-          <h1 className="font-[Poppins] font-semibold text-[20px] mb-[10px]">
+        <form
+          className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
+          onSubmit={handleSubmit}
+        >
+          <label className="font-[Poppins] font-semibold text-[20px] mb-[10px]">
             Add task
-          </h1>
+          </label>
           <input
             type="text"
             placeholder="Task description"
             className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
             id="task-input"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           ></input>
           <button
             type="submit"

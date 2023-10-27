@@ -1,10 +1,12 @@
 import Avatar from "../images/avatar.avif";
+import { useState } from "react";
 
 const Header = ({ toggleProfileModal }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
   return (
     <header className="header m-[20px]">
       <div className="flex justify-between">
@@ -21,7 +23,7 @@ const Header = ({ toggleProfileModal }) => {
             onClick={toggleProfileModal}
           ></img>
           <p className="font-[Poppins] mt-[5px]" onClick={toggleProfileModal}>
-            Hey, Dillon
+            Hey Dillon
           </p>
         </div>
       </div>

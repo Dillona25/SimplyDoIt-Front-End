@@ -8,6 +8,8 @@ export default {
         submit: "url('../src/images/send.svg')",
         Add: "url('../src/images/add.svg')",
         profile: "url('../src/images/avatar.avif')",
+        edit: "url('../src/images/pen-to-square-solid.svg')",
+        delete: "url('../src/images/delete.svg')",
       },
     },
   },
