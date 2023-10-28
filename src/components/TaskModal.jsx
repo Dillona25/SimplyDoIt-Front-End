@@ -12,7 +12,7 @@ const TaskModal = ({ toggleCloseModal, addTodo }) => {
   return (
     <div
       id="add-task-modal"
-      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/80 max-w-[700px] h-[100%] m-auto "
+      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-[2] bg-black/80 max-w-[700px] h-[100%] m-auto "
     >
       <div className="position: relative bg-white m-auto p-[30px] max-w-[500px] rounded-lg box-border">
         <button

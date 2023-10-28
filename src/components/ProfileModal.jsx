@@ -1,12 +1,10 @@
 import Avatar from "../images/avatar.avif";
 import { useState } from "react";
 
-const ProfileModal = ({ toggleCloseModal }) => {
-  const [value, setValue] = useState("");
-
+const ProfileModal = ({ toggleCloseModal, children }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
+    toggleCloseModal();
   };
 
   return (
@@ -23,34 +21,7 @@ const ProfileModal = ({ toggleCloseModal }) => {
           className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
           onSubmit={handleSubmit}
         >
-          <img
-            className=" bg-center h-[140px] w-[160px] self-center rounded-[50%] mt-[30px]"
-            src={Avatar}
-          ></img>
-          <label className="font-[Poppins] text-[20px]  mt-[30px]">
-            Change Name
-          </label>
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          ></input>
-          <label className="font-[Poppins] text-[20px]  mt-[10px]">
-            Change Profile Image
-          </label>
-          <input
-            type="url"
-            placeholder="Image Url"
-            className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
-          ></input>
-          <button
-            type="submit"
-            className=" bg-[#8687E7] py-[5px] mt-[5px] rounded-[10px] font-[Poppins] font-semibold"
-          >
-            Save
-          </button>
+          {children}
         </form>
       </div>
     </div>
