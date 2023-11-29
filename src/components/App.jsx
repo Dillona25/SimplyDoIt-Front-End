@@ -33,11 +33,24 @@ function App() {
     ]);
   };
 
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleImageChange = (e) => {
+    setProfileImage(e.target.value);
+  };
 
   return (
     <div className="App max-w-[700px] m-auto">
-      <Header toggleProfileModal={toggleProfileModal} />
+      <Header
+        toggleProfileModal={toggleProfileModal}
+        name={name}
+        profileImage={profileImage}
+      />
       <Main />
       <Nav toggleTaskModal={toggleTaskModal} />
       {activeModal === "taskModal" && (
@@ -48,7 +61,13 @@ function App() {
       ))}
 
       {activeModal === "profileModal" && (
-        <ProfileModal toggleCloseModal={toggleCloseModal}></ProfileModal>
+        <ProfileModal
+          name={name}
+          profileImage={profileImage}
+          toggleCloseModal={toggleCloseModal}
+          handleNameChange={handleNameChange}
+          handleImageChange={handleImageChange}
+        ></ProfileModal>
       )}
     </div>
   );

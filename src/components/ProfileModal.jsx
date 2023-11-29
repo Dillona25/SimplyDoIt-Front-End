@@ -1,13 +1,13 @@
 import Avatar from "../images/avatar.avif";
 import { useState } from "react";
 
-const ProfileModal = ({ toggleCloseModal }) => {
-  const [name, setName] = useState("");
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
+const ProfileModal = ({
+  toggleCloseModal,
+  name,
+  handleNameChange,
+  profileImage,
+  handleImageChange,
+}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     toggleCloseModal();
@@ -39,23 +39,25 @@ const ProfileModal = ({ toggleCloseModal }) => {
               >
                 <img
                   className=" bg-center h-[140px] w-[160px] self-center rounded-[50%] mt-[30px]"
-                  src={Avatar}
+                  src={profileImage || Avatar}
                 ></img>
                 <label className="font-[Poppins] text-[20px]  mt-[30px]">
                   Change Name
                 </label>
                 <input
-                  type="text"
-                  placeholder="Name"
                   onChange={handleNameChange}
                   value={name}
+                  type="text"
+                  placeholder="Name"
                   className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
                 ></input>
                 <label className="font-[Poppins] text-[20px]  mt-[10px]">
                   Change Profile Image
                 </label>
                 <input
-                  type="url"
+                  type="link"
+                  value={profileImage}
+                  onChange={handleImageChange}
                   placeholder="Image Url"
                   className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
                 ></input>

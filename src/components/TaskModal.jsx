@@ -3,10 +3,10 @@ import { useState } from "react";
 const TaskModal = ({ toggleCloseModal, addTodo }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(value);
+    addTodo();
     toggleCloseModal();
-    setValue("");
   };
+
   return (
     <div
       id="add-task-modal"
@@ -29,7 +29,6 @@ const TaskModal = ({ toggleCloseModal, addTodo }) => {
             placeholder="Task description"
             className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
             id="task-input"
-            value={value}
           ></input>
           <button
             type="submit"
