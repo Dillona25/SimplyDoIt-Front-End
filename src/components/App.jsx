@@ -33,6 +33,8 @@ function App() {
     ]);
   };
 
+  const [name, setName] = useState();
+
   return (
     <div className="App max-w-[700px] m-auto">
       <Header toggleProfileModal={toggleProfileModal} />

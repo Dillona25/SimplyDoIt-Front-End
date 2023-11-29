@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 const TaskModal = ({ toggleCloseModal, addTodo }) => {
-  const [value, setValue] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     addTodo(value);
@@ -32,7 +30,6 @@ const TaskModal = ({ toggleCloseModal, addTodo }) => {
             className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
             id="task-input"
             value={value}
-            onChange={(e) => setValue(e.target.value)}
           ></input>
           <button
             type="submit"

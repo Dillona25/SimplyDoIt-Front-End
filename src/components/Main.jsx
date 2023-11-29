@@ -1,5 +1,4 @@
 import ToDoLogo from "../images/ToDoLogo.svg";
-import { useState } from "react";
 
 const Main = () => {
   return (

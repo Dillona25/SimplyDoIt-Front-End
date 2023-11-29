@@ -2,24 +2,28 @@ import Avatar from "../images/avatar.avif";
 import { useState } from "react";
 
 const ProfileModal = ({ toggleCloseModal }) => {
+  const [name, setName] = useState("");
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    toggleCloseModal();
   };
 
   return (
     <div
       id="profile-modal"
-      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/80 max-w-[700px] h-[100%] "
+      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/20 max-w-[700px] h-[100%] "
     >
       <div className="position: relative bg-white m-auto p-[30px] max-w-[500px] rounded-lg box-border">
         <button
           className="bg-close top-5 right-5 position: absolute w-[30px] h-[30px]"
           onClick={toggleCloseModal}
         ></button>
-        <form
-          className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
-          onSubmit={handleSubmit}
-        >
+        <div className="flex flex-col gap-[10px] w-[300px] mt-[20px]">
           <div
             id="profile-modal"
             className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/80 max-w-[700px] h-[100%] "
@@ -43,6 +47,8 @@ const ProfileModal = ({ toggleCloseModal }) => {
                 <input
                   type="text"
                   placeholder="Name"
+                  onChange={handleNameChange}
+                  value={name}
                   className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
                 ></input>
                 <label className="font-[Poppins] text-[20px]  mt-[10px]">
@@ -62,7 +68,7 @@ const ProfileModal = ({ toggleCloseModal }) => {
               </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
