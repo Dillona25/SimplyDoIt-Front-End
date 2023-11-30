@@ -5,8 +5,8 @@ const Todo = ({ task }) => {
         {task.task}
       </p>
       <div className="flex justify-center gap-[20px]">
-        <button className="bg-edit h-[25px] w-[25px] bg-no-repeat scale-125 m-auto"></button>
-        <button className="bg-delete bg-no-repeat h-[25px] w-[25px] scale-125 m-auto"></button>
+        <button className="bg-edit h-[20px] w-[20px] bg-no-repeat scale-125 m-auto"></button>
+        <button className="bg-delete bg-no-repeat h-[20px] w-[20px] scale-125 m-auto"></button>
       </div>
     </div>
   );

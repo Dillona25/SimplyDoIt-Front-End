@@ -44,6 +44,12 @@ function App() {
     setProfileImage(e.target.value);
   };
 
+  const [showMain, setShowMain] = useState(true);
+
+  const handleShowMain = () => {
+    setShowMain(false);
+  };
+
   return (
     <div className="App max-w-[700px] m-auto">
       <Header
@@ -51,10 +57,14 @@ function App() {
         name={name}
         profileImage={profileImage}
       />
-      <Main />
+      {showMain && <Main />}
       <Nav toggleTaskModal={toggleTaskModal} />
       {activeModal === "taskModal" && (
-        <TaskModal toggleCloseModal={toggleCloseModal} addTodo={addTodo} />
+        <TaskModal
+          toggleCloseModal={toggleCloseModal}
+          addTodo={addTodo}
+          handleShowMain={handleShowMain}
+        />
       )}
       {todos.map((todo, index) => (
         <Todo task={todo} key={index} />
