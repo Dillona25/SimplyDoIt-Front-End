@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import TaskModal from "./TaskModal";
 import Todo from "./Todo";
 import ProfileModal from "./ProfileModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Avatar from "../images/avatar.avif";
 uuidv4();
@@ -34,6 +34,8 @@ function App() {
       {
         id: uuidv4(),
         task: todo,
+        completed: false,
+        isEditing: false,
       },
     ]);
   };
@@ -50,8 +52,16 @@ function App() {
     setShowMain(false);
   };
 
-  const handleDeleteTask = () => {
-    setIsDeleted(false);
+  const toggleComplete = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const deleteToDo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -71,7 +81,12 @@ function App() {
         />
       )}
       {todos.map((todo, index) => (
-        <Todo task={todo} key={index} />
+        <Todo
+          task={todo}
+          key={index}
+          toggleComplete={toggleComplete}
+          deleteToDo={deleteToDo}
+        />
       ))}
 
       {activeModal === "profileModal" && (

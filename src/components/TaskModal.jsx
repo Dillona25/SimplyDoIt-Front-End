@@ -9,7 +9,6 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
     toggleCloseModal();
     handleShowMain();
     setTask("");
-    setTime("");
   };
 
   return (

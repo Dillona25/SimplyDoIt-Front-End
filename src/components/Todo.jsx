@@ -1,6 +1,11 @@
-const Todo = ({ task }) => {
+const Todo = ({ task, toggleComplete, deleteToDo }) => {
   return (
-    <div className="bg-[#8687E7] p-[15px] rounded-md m-auto ml-[20px] mr-[20px] mt-[20px] flex justify-between">
+    <div
+      onClick={() => toggleComplete(task.id)}
+      className={`${
+        task.completed ? "bg-[#17b169] opacity-50" : ""
+      } bg-[#8687E7] p-[15px] rounded-md m-auto ml-[20px] mr-[20px] mt-[20px] flex justify-between cursor-pointer`}
+    >
       <div className="flex flex-col">
         <p className="font-[Poppins] text-white text-[20px] text-ellipsis whitespace-nowrap">
           {task.task}
@@ -9,7 +14,10 @@ const Todo = ({ task }) => {
       </div>
       <div className="flex justify-center gap-[20px]">
         <button className="bg-edit h-[20px] w-[20px] bg-no-repeat scale-125 m-auto"></button>
-        <button className="bg-delete bg-no-repeat h-[20px] w-[20px] scale-125 m-auto"></button>
+        <button
+          onClick={() => deleteToDo(task.id)}
+          className="bg-delete bg-no-repeat h-[20px] w-[20px] scale-125 m-auto"
+        ></button>
       </div>
     </div>
   );
