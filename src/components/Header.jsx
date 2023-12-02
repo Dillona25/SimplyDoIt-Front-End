@@ -14,11 +14,11 @@ const Header = ({ toggleProfileModal, name, profileImage }) => {
         </h1>
         <div className="flex flex-col content-center">
           <img
-            className="h-[35px] w-[42px] self-center bg-center rounded-[50%]"
+            className="h-[35px] w-[42px] self-center bg-center rounded-[50%] cursor-pointer"
             src={profileImage || Avatar}
             onClick={toggleProfileModal}
           ></img>
-          <p className="font-[Poppins] mt-[5px] max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
+          <p className="font-[Poppins] mt-[5px] max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer">
             Hello {name || "user"}
           </p>
         </div>

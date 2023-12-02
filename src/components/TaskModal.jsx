@@ -1,14 +1,15 @@
 import { useState } from "react";
 
 const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
-  const [value, setValue] = useState("");
+  const [task, setTask] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(value);
+    addTodo(task);
     toggleCloseModal();
     handleShowMain();
-    setValue("");
+    setTask("");
+    setTime("");
   };
 
   return (
@@ -33,13 +34,22 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
             placeholder="Task description"
             className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
             id="task-input"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+            required
+            minLength={3}
           ></input>
-          <button
-            type="submit"
-            className="bg-submit w-[24px] h-[24px] mt-[5px]"
-          ></button>
+          <div className="flex gap-[20px]">
+            <input
+              type="time"
+              className="bg-[#8687E7] px-[20px] py-[7px] rounded-md"
+              id="task-input"
+            ></input>
+            <button
+              type="submit"
+              className="bg-submit w-[24px] h-[24px] mt-[5px]"
+            ></button>
+          </div>
         </form>
       </div>
     </div>

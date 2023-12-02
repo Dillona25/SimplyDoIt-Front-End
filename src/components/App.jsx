@@ -11,6 +11,10 @@ uuidv4();
 
 function App() {
   const [activeModal, setActiveModal] = useState([]);
+  const [showMain, setShowMain] = useState(true);
+  const [todos, setTodos] = useState([]);
+  const [name, setName] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   const toggleTaskModal = () => {
     setActiveModal("taskModal");
@@ -24,17 +28,15 @@ function App() {
     setActiveModal("");
   };
 
-  const [todos, setTodos] = useState([]);
-
   const addTodo = (todo) => {
     setTodos([
       ...todos,
-      { id: uuidv4(), task: todo, complete: false, isEditing: false },
+      {
+        id: uuidv4(),
+        task: todo,
+      },
     ]);
   };
-
-  const [name, setName] = useState("");
-  const [profileImage, setProfileImage] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -44,10 +46,12 @@ function App() {
     setProfileImage(e.target.value);
   };
 
-  const [showMain, setShowMain] = useState(true);
-
   const handleShowMain = () => {
     setShowMain(false);
+  };
+
+  const handleDeleteTask = () => {
+    setIsDeleted(false);
   };
 
   return (
