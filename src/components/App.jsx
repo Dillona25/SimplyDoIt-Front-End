@@ -7,6 +7,7 @@ import ProfileModal from "./ProfileModal";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Avatar from "../images/avatar.avif";
+import ConfirmationModal from "./ConfirmationModal";
 uuidv4();
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
 
   const toggleProfileModal = () => {
     setActiveModal("profileModal");
+  };
+
+  const toggleConfirmationModal = () => {
+    setActiveModal("confirmModal");
   };
 
   const toggleCloseModal = () => {
@@ -85,7 +90,7 @@ function App() {
           task={todo}
           key={index}
           toggleComplete={toggleComplete}
-          deleteToDo={deleteToDo}
+          toggleConfirmationModal={toggleConfirmationModal}
         />
       ))}
 
@@ -98,6 +103,15 @@ function App() {
           handleImageChange={handleImageChange}
         ></ProfileModal>
       )}
+      {activeModal === "confirmModal" &&
+        todos.map((todo, index) => (
+          <ConfirmationModal
+            task={todo}
+            key={index}
+            deleteToDo={deleteToDo}
+            toggleCloseModal={toggleCloseModal}
+          />
+        ))}
     </div>
   );
 }
