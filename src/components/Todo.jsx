@@ -1,13 +1,13 @@
 const Todo = ({ task, toggleComplete, deleteToDo }) => {
   return (
-    <div
-      onClick={() => toggleComplete(task.id)}
-      className={`${
-        task.completed ? "bg-[#17b169] opacity-50" : ""
-      } bg-[#8687E7] p-[15px] rounded-md m-auto ml-[20px] mr-[20px] mt-[20px] flex justify-between cursor-pointer`}
-    >
+    <div className="bg-[#8687E7] p-[15px] rounded-md m-auto ml-[20px] mr-[20px] mt-[20px] flex justify-between cursor-pointer">
       <div className="flex flex-col">
-        <p className="font-[Poppins] text-white text-[20px] text-ellipsis whitespace-nowrap">
+        <p
+          onClick={() => toggleComplete(task.id)}
+          className={`${
+            task.completed ? "line-through" : ""
+          } font-[Poppins] text-white text-[20px] text-ellipsis whitespace-nowrap`}
+        >
           {task.task}
         </p>
         <p className="font-[Poppins] text-white text-[15px]"></p>
