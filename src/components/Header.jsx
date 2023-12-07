@@ -14,7 +14,7 @@ const Header = ({ toggleProfileModal, name, profileImage }) => {
         </h1>
         <div className="flex flex-col content-center">
           <img
-            className="h-[35px] w-[42px] self-center bg-center rounded-[50%] cursor-pointer"
+            className="h-[50px] w-[50px] self-center bg-center rounded-[50%] cursor-pointer"
             src={profileImage || Avatar}
             onClick={toggleProfileModal}
           ></img>

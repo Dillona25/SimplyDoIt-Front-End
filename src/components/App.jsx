@@ -67,6 +67,7 @@ function App() {
 
   const deleteToDo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+    toggleCloseModal();
   };
 
   return (
@@ -85,14 +86,16 @@ function App() {
           handleShowMain={handleShowMain}
         />
       )}
-      {todos.map((todo, index) => (
-        <Todo
-          task={todo}
-          key={index}
-          toggleComplete={toggleComplete}
-          toggleConfirmationModal={toggleConfirmationModal}
-        />
-      ))}
+      <div className="h-[525px] overflow-auto">
+        {todos.map((todo, index) => (
+          <Todo
+            task={todo}
+            key={index}
+            toggleComplete={toggleComplete}
+            toggleConfirmationModal={toggleConfirmationModal}
+          />
+        ))}
+      </div>
 
       {activeModal === "profileModal" && (
         <ProfileModal

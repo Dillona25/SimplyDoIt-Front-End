@@ -16,7 +16,7 @@ const ProfileModal = ({
   return (
     <div
       id="profile-modal"
-      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/20 max-w-[700px] h-[100%] "
+      className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/2 max-w-[700px] h-[100%] "
     >
       <div className="position: relative bg-white m-auto p-[30px] max-w-[500px] rounded-lg box-border">
         <button
@@ -38,7 +38,7 @@ const ProfileModal = ({
                 onSubmit={handleSubmit}
               >
                 <img
-                  className=" bg-center h-[140px] w-[160px] self-center rounded-[50%] mt-[30px]"
+                  className=" bg-center h-[160px] w-[160px] self-center rounded-[50%] mt-[30px]"
                   src={profileImage || Avatar}
                 ></img>
                 <label className="font-[Poppins] text-[20px]  mt-[30px]">

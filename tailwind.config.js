@@ -10,6 +10,7 @@ export default {
         profile: "url('../src/images/avatar.avif')",
         edit: "url('../src/images/pen-to-square-solid.svg')",
         delete: "url('../src/images/delete.svg')",
+        profile: "url('../src/images/user.svg')",
       },
     },
   },
