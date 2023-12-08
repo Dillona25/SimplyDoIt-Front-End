@@ -11,6 +11,7 @@ export default {
         edit: "url('../src/images/pen-to-square-solid.svg')",
         delete: "url('../src/images/delete.svg')",
         profile: "url('../src/images/user.svg')",
+        home: "url('../src/images/home.svg')",
       },
     },
   },

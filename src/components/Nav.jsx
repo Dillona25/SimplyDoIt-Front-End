@@ -1,13 +1,21 @@
 const Nav = ({ toggleTaskModal }) => {
   return (
-    <nav className="nav position: fixed w-[100%] bottom-0 border-black border-t-[1px] h-[75px]">
+    <nav className="nav position: fixed w-[100%] mb-[25px] bottom-0 h-[75px]">
       <div>
-        <div className="flex gap-[20px] list-none p-[20px] justify-center ">
-          <div className="bg-black  w-[64px] h-[64px] rounded-[50%] flex justify-center position: relative top-[-50px]">
+        <div className="flex gap-[20px] p-[20px] justify-evenly">
+          <div className="flex flex-col items-center gap-[10px]">
+            <button className="bg-home h-[24px] w-[24px]"></button>
+            <p className="font-[Poppins] text-[15px]">Home</p>
+          </div>
+          <div className="bg-black  w-[64px] h-[64px] rounded-[50%] flex justify-center position: relative top-[-30px]">
             <button
               className="h-[32px] w-[32px] self-center bg-Add"
               onClick={toggleTaskModal}
             ></button>
+          </div>
+          <div className="flex flex-col items-center gap-[10px]">
+            <button className="bg-profile h-[24px] w-[24px]"></button>
+            <p className="font-[Poppins] text-[15px]">Profile</p>
           </div>
         </div>
       </div>
