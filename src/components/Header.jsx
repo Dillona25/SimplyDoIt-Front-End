@@ -1,6 +1,6 @@
 import Avatar from "../images/avatar.avif";
 
-const Header = ({ toggleProfileModal, name, profileImage }) => {
+const Header = ({ name, profileImage }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -14,11 +14,10 @@ const Header = ({ toggleProfileModal, name, profileImage }) => {
         </h1>
         <div className="flex flex-col content-center">
           <img
-            className="h-[50px] w-[50px] self-center bg-center rounded-[50%] cursor-pointer"
+            className="h-[50px] w-[50px] self-center bg-center rounded-[50%]"
             src={profileImage || Avatar}
-            onClick={toggleProfileModal}
           ></img>
-          <p className="font-[Poppins] mt-[5px] max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer">
+          <p className="font-[Poppins] mt-[5px] max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
             Hello {name || "user"}
           </p>
         </div>

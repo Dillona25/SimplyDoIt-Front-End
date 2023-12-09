@@ -8,6 +8,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Avatar from "../images/avatar.avif";
 import ConfirmationModal from "./ConfirmationModal";
+import EditTask from "./EditTask";
 uuidv4();
 
 function App() {
@@ -70,6 +71,22 @@ function App() {
     toggleCloseModal();
   };
 
+  const editTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    );
+  };
+
+  const editTask = (task, id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+      )
+    );
+  };
+
   return (
     <div className="App max-w-[700px] m-auto">
       <Header
@@ -78,7 +95,10 @@ function App() {
         profileImage={profileImage}
       />
       {showMain && <Main />}
-      <Nav toggleTaskModal={toggleTaskModal} />
+      <Nav
+        toggleTaskModal={toggleTaskModal}
+        toggleProfileModal={toggleProfileModal}
+      />
       {activeModal === "taskModal" && (
         <TaskModal
           toggleCloseModal={toggleCloseModal}
@@ -86,15 +106,20 @@ function App() {
           handleShowMain={handleShowMain}
         />
       )}
-      <div className="h-[525px] overflow-auto">
-        {todos.map((todo, index) => (
-          <Todo
-            task={todo}
-            key={index}
-            toggleComplete={toggleComplete}
-            toggleConfirmationModal={toggleConfirmationModal}
-          />
-        ))}
+      <div className="max-h-[500px] overflow-auto">
+        {todos.map((todo, index) =>
+          todo.isEditing ? (
+            <EditTask key={index} editTodo={editTask} task={todo} />
+          ) : (
+            <Todo
+              task={todo}
+              key={index}
+              toggleComplete={toggleComplete}
+              toggleConfirmationModal={toggleConfirmationModal}
+              editTodo={editTodo}
+            />
+          )
+        )}
       </div>
 
       {activeModal === "profileModal" && (

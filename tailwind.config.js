@@ -12,6 +12,7 @@ export default {
         delete: "url('../src/images/delete.svg')",
         profile: "url('../src/images/user.svg')",
         home: "url('../src/images/home.svg')",
+        settings: "url('../src/images/settings.svg')",
       },
     },
   },

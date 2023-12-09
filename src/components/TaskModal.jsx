@@ -39,11 +39,6 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
             minLength={3}
           ></input>
           <div className="flex gap-[20px]">
-            <input
-              type="time"
-              className="bg-[#8687E7] px-[20px] py-[7px] rounded-md"
-              id="task-input"
-            ></input>
             <button
               type="submit"
               className="bg-submit w-[24px] h-[24px] mt-[5px]"
