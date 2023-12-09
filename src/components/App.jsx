@@ -13,6 +13,7 @@ import EditTask from "./EditTask";
 import {
   BrowserRouter,
   Route,
+  Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
 uuidv4();
 
@@ -95,62 +96,60 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App max-w-[700px] m-auto">
-        <Route eaxt path="/">
+        <Route exact path="/">
           <Header
             toggleProfileModal={toggleProfileModal}
             name={name}
             profileImage={profileImage}
           />
-        </Route>
-        {showMain && <Main />}
-        <Nav
-          toggleTaskModal={toggleTaskModal}
-          toggleProfileModal={toggleProfileModal}
-        />
-        {activeModal === "taskModal" && (
-          <TaskModal
-            toggleCloseModal={toggleCloseModal}
-            addTodo={addTodo}
-            handleShowMain={handleShowMain}
+          <Nav
+            toggleTaskModal={toggleTaskModal}
+            toggleProfileModal={toggleProfileModal}
           />
-        )}
-        <div className="max-h-[500px] overflow-auto">
-          {todos.map((todo, index) =>
-            todo.isEditing ? (
-              <EditTask key={index} editTodo={editTask} task={todo} />
-            ) : (
-              <Todo
+          {showMain && <Main />}
+          {activeModal === "taskModal" && (
+            <TaskModal
+              toggleCloseModal={toggleCloseModal}
+              addTodo={addTodo}
+              handleShowMain={handleShowMain}
+            />
+          )}
+          <div className="max-h-[500px] overflow-auto">
+            {todos.map((todo, index) =>
+              todo.isEditing ? (
+                <EditTask key={index} editTodo={editTask} task={todo} />
+              ) : (
+                <Todo
+                  task={todo}
+                  key={index}
+                  toggleComplete={toggleComplete}
+                  toggleConfirmationModal={toggleConfirmationModal}
+                  editTodo={editTodo}
+                />
+              )
+            )}
+          </div>
+          {activeModal === "confirmModal" &&
+            todos.map((todo, index) => (
+              <ConfirmationModal
                 task={todo}
                 key={index}
-                toggleComplete={toggleComplete}
-                toggleConfirmationModal={toggleConfirmationModal}
-                editTodo={editTodo}
+                deleteToDo={deleteToDo}
+                toggleCloseModal={toggleCloseModal}
               />
-            )
-          )}
-        </div>
-        <Route path="/Profile">
-          <Profile />
+            ))}
         </Route>
-
-        {/* {activeModal === "profileModal" && (
-        <ProfileModal
-          name={name}
-          profileImage={profileImage}
-          toggleCloseModal={toggleCloseModal}
-          handleNameChange={handleNameChange}
-          handleImageChange={handleImageChange}
-        ></ProfileModal>
-      )} */}
-        {activeModal === "confirmModal" &&
-          todos.map((todo, index) => (
-            <ConfirmationModal
-              task={todo}
-              key={index}
-              deleteToDo={deleteToDo}
+        <Switch>
+          <Route path="/Profile">
+            <Profile
+              name={name}
+              profileImage={profileImage}
               toggleCloseModal={toggleCloseModal}
+              handleNameChange={handleNameChange}
+              handleImageChange={handleImageChange}
             />
-          ))}
+          </Route>
+        </Switch>
       </div>
     </BrowserRouter>
   );

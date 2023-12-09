@@ -18,8 +18,8 @@ const Nav = ({ toggleTaskModal, toggleProfileModal }) => {
           ></button>
         </div>
         <div className="flex flex-col items-center gap-[10px]">
-          <button className="bg-settings h-[24px] w-[24px]"></button>
-          <p className="font-[Poppins] `text-[15px]">Settings</p>
+          <button className="bg-home h-[24px] w-[24px]"></button>
+          <p className="font-[Poppins] `text-[15px]">Home</p>
         </div>
       </div>
     </nav>
