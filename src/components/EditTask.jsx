@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const EditTask = ({ editTodo, task }) => {
   const [value, setValue] = useState(task.task);
@@ -14,7 +15,11 @@ const EditTask = ({ editTodo, task }) => {
       id="add-task-modal"
       className="position: fixed flex bottom-0 top-0 right-0 left-0 z-[2] bg-black/80 max-w-[100%] h-[100%] m-auto "
     >
-      <div className="position: relative bg-white m-auto p-[30px] w-[300px] rounded-lg box-border">
+      <motion.div
+        animate={{ scale: 1 }}
+        initial={{ scale: 0 }}
+        className="bg-white m-auto p-[30px] w-[300px] rounded-lg box-border"
+      >
         <form
           className="flex flex-col gap-[10px] mt-[20px]"
           onSubmit={handleSubmit}
@@ -39,7 +44,7 @@ const EditTask = ({ editTodo, task }) => {
             ></button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

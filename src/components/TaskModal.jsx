@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
   const [task, setTask] = useState("");
@@ -16,7 +17,12 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
       id="add-task-modal"
       className="position: fixed flex bottom-0 top-0 right-0 left-0 z-[2] bg-black/80 max-w-[700px] h-[100%] m-auto "
     >
-      <div className="position: relative bg-white m-auto p-[30px] max-w-[500px] rounded-lg box-border">
+      <motion.div
+        animate={{ y: 0 }}
+        initial={{ y: -500 }}
+        transition={{ type: "spring", stiffness: 300 }}
+        className="position: relative bg-white m-auto p-[30px] max-w-[500px] rounded-lg box-border"
+      >
         <button
           className="bg-close top-5 right-5 position: absolute w-[30px] h-[30px]"
           onClick={toggleCloseModal}
@@ -45,7 +51,7 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
             ></button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

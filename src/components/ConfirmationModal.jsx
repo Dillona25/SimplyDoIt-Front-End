@@ -1,7 +1,13 @@
+import { motion } from "framer-motion";
+
 const ConfirmationModal = ({ task, deleteToDo, toggleCloseModal }) => {
   return (
     <div className="position: fixed flex bottom-0 top-0 right-0 left-0 z-2 bg-black/20  h-[100%]">
-      <div className="position: relative bg-white m-auto p-[30px] max-w-[350px] rounded-lg box-border">
+      <motion.div
+        animate={{ scale: 1 }}
+        initial={{ scale: 0 }}
+        className="position: relative bg-white m-auto p-[30px] max-w-[350px] rounded-lg box-border"
+      >
         <h1 className="font-[Poppins] text-[20px] font-semibold text-center">
           Are you sure you want to delete this task? It cannot be undone.
         </h1>
@@ -19,7 +25,7 @@ const ConfirmationModal = ({ task, deleteToDo, toggleCloseModal }) => {
             Cancel
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
