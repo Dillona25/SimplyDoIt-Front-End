@@ -18,7 +18,7 @@ const Header = ({ name, profileImage }) => {
             src={profileImage || Avatar}
           ></img>
           <p className="font-[Poppins] mt-[5px] max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
-            Hello {name || "user"}
+            Hello {name || "Dillon"}
           </p>
         </div>
       </div>

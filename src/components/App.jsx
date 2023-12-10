@@ -16,6 +16,7 @@ import {
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
 uuidv4();
+import Settings from "./Settings";
 
 function App() {
   const [activeModal, setActiveModal] = useState([]);
@@ -148,6 +149,9 @@ function App() {
               handleNameChange={handleNameChange}
               handleImageChange={handleImageChange}
             />
+          </Route>
+          <Route path="/Settings">
+            <Settings />
           </Route>
         </Switch>
       </div>
