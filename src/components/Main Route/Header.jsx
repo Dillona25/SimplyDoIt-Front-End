@@ -1,4 +1,4 @@
-import Avatar from "../images/avatar.avif";
+import Avatar from "../../images/avatar.avif";
 
 const Header = ({ name, profileImage }) => {
   const currentDate = new Date().toLocaleString("default", {

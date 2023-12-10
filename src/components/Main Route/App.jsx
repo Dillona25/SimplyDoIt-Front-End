@@ -1,13 +1,13 @@
-import Header from "../components/Header";
-import Main from "../components/Main";
-import Nav from "../components/Nav";
+import Header from "./Header";
+import Main from "./Main";
+import Nav from "./Nav";
 import TaskModal from "./TaskModal";
 import Todo from "./Todo";
 // import ProfileModal from "./ProfileModal";
 import Profile from "./Profile";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Avatar from "../images/avatar.avif";
+import Avatar from "../../images/avatar.avif";
 import ConfirmationModal from "./ConfirmationModal";
 import EditTask from "./EditTask";
 import {
@@ -16,7 +16,9 @@ import {
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
 uuidv4();
-import Settings from "./Settings";
+import Settings from "../Settings route/Settings";
+import FeedbackModal from "../Settings route/FeedbackModal";
+import PasswordModal from "../Settings route/PasswordModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState([]);
@@ -35,6 +37,14 @@ function App() {
 
   const toggleConfirmationModal = () => {
     setActiveModal("confirmModal");
+  };
+
+  const toggleFeedbackModal = () => {
+    setActiveModal("contactModal");
+  };
+
+  const togglePasswordModal = () => {
+    setActiveModal("passwordModal");
   };
 
   const toggleCloseModal = () => {
@@ -151,9 +161,18 @@ function App() {
             />
           </Route>
           <Route path="/Settings">
-            <Settings />
+            <Settings
+              toggleFeedbackModal={toggleFeedbackModal}
+              togglePasswordModal={togglePasswordModal}
+            ></Settings>
           </Route>
         </Switch>
+        {activeModal === "contactModal" && (
+          <FeedbackModal toggleCloseModal={toggleCloseModal} />
+        )}
+        {activeModal === "passwordModal" && (
+          <PasswordModal toggleCloseModal={toggleCloseModal} />
+        )}
       </div>
     </BrowserRouter>
   );

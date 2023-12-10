@@ -1,4 +1,4 @@
-import ToDoLogo from "../images/ToDoLogo.svg";
+import ToDoLogo from "../../images/ToDoLogo.svg";
 
 const Main = () => {
   return (

@@ -1,4 +1,4 @@
-import Avatar from "../images/avatar.avif";
+import Avatar from "../../images/avatar.avif";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Profile = ({
@@ -26,9 +26,7 @@ const Profile = ({
         onSubmit={handleSubmit}
         className="flex flex-col gap-[10px] w-[100%]"
       >
-        <label className="font-[Poppins] font-semibold text-[20px]  mt-[30px]">
-          Change Name
-        </label>
+        <label className="font-[Poppins] mt-[30px]">Change Name</label>
         <input
           onChange={handleNameChange}
           value={name}
@@ -36,9 +34,7 @@ const Profile = ({
           placeholder="Name"
           className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
         ></input>
-        <label className="font-[Poppins] font-semibold text-[20px]  mt-[10px]">
-          Change Profile Image
-        </label>
+        <label className="font-[Poppins] mt-[10px]">Change Profile Image</label>
         <input
           type="link"
           value={profileImage}
@@ -49,7 +45,7 @@ const Profile = ({
         <Link to="/" className="w-[50%] self-center">
           <button
             type="submit"
-            className=" bg-[#8687E7] py-[10px] mt-[5px] rounded-[10px] font-[Poppins] font-semibold w-[100%]"
+            className="bg-black text-white font-[Poppins] w-[100%] py-[10px] rounded-md m-auto"
           >
             Save
           </button>
