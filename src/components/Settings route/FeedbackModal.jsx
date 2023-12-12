@@ -1,7 +1,31 @@
 import { motion } from "framer-motion";
 import feedback from "../../images/feedback.svg";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 const FeedbackModal = ({ toggleCloseModal }) => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    toggleCloseModal();
+
+    emailjs
+      .sendForm(
+        "service_2giy5m7",
+        "template_wql51t6",
+        form.current,
+        "sKJvZiM-ZQ5-Pjc96"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
   return (
     <div
       id="add-task-modal"
@@ -29,22 +53,29 @@ const FeedbackModal = ({ toggleCloseModal }) => {
           With your help, we can improve our site!
         </h2>
         <img src={feedback} className="h-[200px] w-fit m-auto"></img>
-        <form className="flex flex-col gap-[10px] w-[300px] mt-[20px]">
+        <form
+          className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
+          ref={form}
+          onSubmit={sendEmail}
+        >
           <label className="font-[Poppins]">Your name</label>
           <input
             type="text"
+            name="user_name"
             placeholder="Name"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
           ></input>
           <label className="font-[Poppins]">Your email</label>
           <input
             type="email"
+            name="user_email"
             placeholder="email"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
           ></input>
           <label className="font-[Poppins]">Send us a message</label>
           <textarea
             type="email"
+            name="message"
             placeholder="Your message"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
           ></textarea>

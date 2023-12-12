@@ -3,7 +3,6 @@ import Main from "./Main";
 import Nav from "./Nav";
 import TaskModal from "./TaskModal";
 import Todo from "./Todo";
-// import ProfileModal from "./ProfileModal";
 import Profile from "./Profile";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
