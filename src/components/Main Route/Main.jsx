@@ -13,7 +13,6 @@ const Main = () => {
             Press + to add a task
           </p>
         </div>
-        <div></div>
       </section>
     </main>
   );

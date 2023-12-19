@@ -1,31 +1,55 @@
 import { motion } from "framer-motion";
 import feedback from "../../images/feedback.svg";
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FeedbackModal = ({ toggleCloseModal }) => {
-  const form = useRef();
+  const [inputFields, setInputFields] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    toggleCloseModal();
+  const [errors, setErrors] = useState({});
 
-    emailjs
-      .sendForm(
-        "service_2giy5m7",
-        "template_wql51t6",
-        form.current,
-        "sKJvZiM-ZQ5-Pjc96"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+  const [submitting, setSubmitting] = useState(false);
+
+  const validateValues = (inputValues) => {
+    const errors = {};
+    if (inputValues.name.length < 2) {
+      errors.name = "Name is not long enough, please use 2 characters or more";
+    }
+    if (inputValues.email.length < 8) {
+      errors.email =
+        "Email is not long enough, please use 8 characters or more";
+    }
+    if (inputValues.message.length < 10) {
+      errors.message =
+        "Message not long enough, dont be shy! Please use 10 characters or more";
+    }
+    return errors;
   };
+
+  const handleChange = (e) => {
+    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors(validateValues(inputFields));
+    setSubmitting(true);
+  };
+
+  const finishSubmit = () => {
+    console.log(inputFields);
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitting) {
+      finishSubmit();
+    }
+  }, [errors]);
+
   return (
     <div
       id="add-task-modal"
@@ -55,30 +79,51 @@ const FeedbackModal = ({ toggleCloseModal }) => {
         <img src={feedback} className="h-[200px] w-fit m-auto"></img>
         <form
           className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
-          ref={form}
-          onSubmit={sendEmail}
+          onSubmit={handleSubmit}
         >
           <label className="font-[Poppins]">Your name</label>
           <input
-            type="text"
-            name="user_name"
+            type="name"
+            name="name"
+            value={inputFields.name}
+            onChange={handleChange}
             placeholder="Name"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
+            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></input>
+          {errors.name ? (
+            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
+              Name is not long enough, please use 2 characters or more
+            </p>
+          ) : null}
           <label className="font-[Poppins]">Your email</label>
           <input
             type="email"
-            name="user_email"
+            name="email"
+            value={inputFields.email}
+            onChange={handleChange}
             placeholder="email"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
+            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></input>
+          {errors.email ? (
+            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
+              Email is not long enough, please use 8 characters or more
+            </p>
+          ) : null}
           <label className="font-[Poppins]">Send us a message</label>
           <textarea
-            type="email"
+            type="message"
+            value={inputFields.message}
+            onChange={handleChange}
             name="message"
             placeholder="Your message"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
+            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></textarea>
+          {errors.message ? (
+            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
+              Message not long enough, dont be shy! Please use 10 characters or
+              more
+            </p>
+          ) : null}
           <div className="flex gap-[20px]">
             <button
               type="submit"

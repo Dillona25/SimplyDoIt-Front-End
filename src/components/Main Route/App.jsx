@@ -6,7 +6,6 @@ import Todo from "./Todo";
 import Profile from "./Profile";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Avatar from "../../images/avatar.avif";
 import ConfirmationModal from "./ConfirmationModal";
 import EditTask from "./EditTask";
 import {
