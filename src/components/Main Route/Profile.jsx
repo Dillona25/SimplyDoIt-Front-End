@@ -14,7 +14,7 @@ const Profile = ({
   };
 
   return (
-    <div className="p-[30px] flex flex-col">
+    <div className="p-[30px] flex flex-col mt-[50px]">
       <h1 className="font-[Poppins] font-semibold text-[30px] text-center mt-[25px]">
         Your Profile
       </h1>

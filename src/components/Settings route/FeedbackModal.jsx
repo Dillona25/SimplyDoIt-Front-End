@@ -1,54 +1,34 @@
 import { motion } from "framer-motion";
 import feedback from "../../images/feedback.svg";
+import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { useEffect, useRef, useState } from "react";
 
 const FeedbackModal = ({ toggleCloseModal }) => {
-  const [inputFields, setInputFields] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const form = useRef();
 
-  const [errors, setErrors] = useState({});
-
-  const [submitting, setSubmitting] = useState(false);
-
-  const validateValues = (inputValues) => {
-    const errors = {};
-    if (inputValues.name.length < 2) {
-      errors.name = "Name is not long enough, please use 2 characters or more";
-    }
-    if (inputValues.email.length < 8) {
-      errors.email =
-        "Email is not long enough, please use 8 characters or more";
-    }
-    if (inputValues.message.length < 10) {
-      errors.message =
-        "Message not long enough, dont be shy! Please use 10 characters or more";
-    }
-    return errors;
-  };
-
-  const handleChange = (e) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+  const sendEmail = (e) => {
+    emailjs
+      .sendForm(
+        "service_2giy5m7",
+        "template_wql51t6",
+        form.current,
+        "sKJvZiM-ZQ5-Pjc96"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validateValues(inputFields));
-    setSubmitting(true);
+    toggleCloseModal();
+    sendEmail();
   };
-
-  const finishSubmit = () => {
-    console.log(inputFields);
-  };
-
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && submitting) {
-      finishSubmit();
-    }
-  }, [errors]);
 
   return (
     <div
@@ -78,52 +58,31 @@ const FeedbackModal = ({ toggleCloseModal }) => {
         </h2>
         <img src={feedback} className="h-[200px] w-fit m-auto"></img>
         <form
+          ref={form}
           className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
           onSubmit={handleSubmit}
         >
           <label className="font-[Poppins]">Your name</label>
           <input
             type="name"
-            name="name"
-            value={inputFields.name}
-            onChange={handleChange}
+            name="user_name"
             placeholder="Name"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></input>
-          {errors.name ? (
-            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
-              Name is not long enough, please use 2 characters or more
-            </p>
-          ) : null}
           <label className="font-[Poppins]">Your email</label>
           <input
             type="email"
-            name="email"
-            value={inputFields.email}
-            onChange={handleChange}
+            name="user_email"
             placeholder="email"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></input>
-          {errors.email ? (
-            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
-              Email is not long enough, please use 8 characters or more
-            </p>
-          ) : null}
           <label className="font-[Poppins]">Send us a message</label>
           <textarea
             type="message"
-            value={inputFields.message}
-            onChange={handleChange}
             name="message"
             placeholder="Your message"
             className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
           ></textarea>
-          {errors.message ? (
-            <p className="font-[Poppins] text-red-600 text-[12px] mb-[5px]">
-              Message not long enough, dont be shy! Please use 10 characters or
-              more
-            </p>
-          ) : null}
           <div className="flex gap-[20px]">
             <button
               type="submit"
