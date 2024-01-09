@@ -1,8 +1,16 @@
-# React + Vite
+# Simply Do It
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Its simple, Simply Do It is a mobile only application in which allows users to plan their day, or even week. The applications allows users to add tasks, edit tasks, delete tasks, and of course mark them as complete. The user can also edit their profile information.
+<br>
+The application was created using React.js, Tailwind CSS, framer motion, and many other react dependencies to make for a slick user experience.
+<br>
+I am currently working on a back-end for the application that will be programmed using Node.js, express.js and MongoDb.
 
-Currently, two official plugins are available:
+# Images of the Application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div align="center">
+<img src="/src/images/SD 1.png" alt="app Image" height="500">
+<img src="/src/images/SD 2.png" alt="app Image" height="500">
+<img src="/src/images/SD 3.png" alt="app Image" height="500">
+<img src="/src/images/SD 4.png" alt="app Image" height="500">
+</div>
