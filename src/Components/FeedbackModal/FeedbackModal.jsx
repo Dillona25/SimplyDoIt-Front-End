@@ -3,6 +3,8 @@ import feedback from "../../images/feedback.svg";
 import React, { useRef } from "react";
 import { Form as ReusableForm } from "../Form/Form";
 import emailjs from "@emailjs/browser";
+import { useForm } from "react-hook-form";
+import { Result } from "postcss";
 
 const FeedbackModal = ({ toggleCloseModal }) => {
   const form = useRef();
@@ -24,6 +26,18 @@ const FeedbackModal = ({ toggleCloseModal }) => {
         }
       );
   };
+
+  const {
+    register,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,24 +78,58 @@ const FeedbackModal = ({ toggleCloseModal }) => {
           onSubmit={handleSubmit}
         >
           <ReusableForm.TextInput
+            errors={errors}
+            register={register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 2,
+                message: "Enter 2 or more characters",
+              },
+            })}
+            isValid={!errors.name}
+            onChange={(evt) => {
+              setValue("name", evt.target.value, { shouldValidate: true });
+            }}
             labelText={"Your Name"}
             type={"name"}
             name={"user_name"}
             placeholder={"Name"}
-          ></ReusableForm.TextInput>
+          />
+          {errors.name && (
+            <ReusableForm.Feedback message={errors.name.message} />
+          )}
           <ReusableForm.TextInput
+            errors={errors}
+            register={register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}/,
+                message: "Invalid Email",
+              },
+            })}
+            onChange={(evt) => {
+              setValue("email", evt.target.value, { shouldValidate: true });
+            }}
+            isValid={!errors.email}
             labelText={"Your email"}
             type={"email"}
             name={"user_email"}
             placeholder={"email"}
-          ></ReusableForm.TextInput>
+          />
+          {errors.email && (
+            <ReusableForm.Feedback message={errors.email.message} />
+          )}
           <ReusableForm.TextArea
             labelText={"Send us a message"}
             type={"message"}
             name={"message"}
             placeholder={"Your message"}
-          ></ReusableForm.TextArea>
-          <ReusableForm.Submit buttonText={"Send"} />
+          />
+          {isValid ? (
+            <ReusableForm.Submit buttonText={"Send"} />
+          ) : (
+            <ReusableForm.Disabled buttonText={"Send"} />
+          )}
         </form>
       </motion.div>
     </div>
