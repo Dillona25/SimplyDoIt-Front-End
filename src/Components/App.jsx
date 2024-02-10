@@ -1,29 +1,27 @@
-import Header from "./Header";
-import Main from "./Main";
-import Nav from "./Nav";
-import TaskModal from "./TaskModal";
-import Todo from "./Todo";
-import Profile from "./Profile";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
+import Nav from "./Nav/Nav";
+import TaskModal from "./TaskModal/TaskModal";
+import Todo from "./Todo/Todo";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import ConfirmationModal from "./ConfirmationModal";
-import EditTask from "./EditTask";
+import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
+import EditTask from "./EditTaskModal/EditTask";
 import {
   BrowserRouter,
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
 uuidv4();
-import Settings from "../Settings route/Settings";
-import FeedbackModal from "../Settings route/FeedbackModal";
-import PasswordModal from "../Settings route/PasswordModal";
+import Settings from "./Settings/Settings";
+import FeedbackModal from "./FeedbackModal/FeedbackModal";
+import PasswordModal from "./PasswordModal/PasswordModal";
+import Login from "../Routes/Login/Login";
 
 function App() {
-  const [activeModal, setActiveModal] = useState([]);
+  const [activeModal, setActiveModal] = useState("");
   const [showMain, setShowMain] = useState(true);
   const [todos, setTodos] = useState([]);
-  const [name, setName] = useState("");
-  const [profileImage, setProfileImage] = useState("");
 
   const toggleTaskModal = () => {
     setActiveModal("taskModal");
@@ -59,14 +57,6 @@ function App() {
         isEditing: false,
       },
     ]);
-  };
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleImageChange = (e) => {
-    setProfileImage(e.target.value);
   };
 
   const handleShowMain = () => {
@@ -105,12 +95,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App max-w-[700px] m-auto">
+        <Route path="/login">
+          <Login />
+        </Route>
         <Route exact path="/">
-          <Header
-            toggleProfileModal={toggleProfileModal}
-            name={name}
-            profileImage={profileImage}
-          />
+          <Header toggleProfileModal={toggleProfileModal} />
           <Nav
             toggleTaskModal={toggleTaskModal}
             toggleProfileModal={toggleProfileModal}
@@ -149,15 +138,7 @@ function App() {
             ))}
         </Route>
         <Switch>
-          <Route path="/Profile">
-            <Profile
-              name={name}
-              profileImage={profileImage}
-              toggleCloseModal={toggleCloseModal}
-              handleNameChange={handleNameChange}
-              handleImageChange={handleImageChange}
-            />
-          </Route>
+          <Route path="/Profile"></Route>
           <Route path="/Settings">
             <Settings
               toggleFeedbackModal={toggleFeedbackModal}

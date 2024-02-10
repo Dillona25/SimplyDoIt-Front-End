@@ -7,7 +7,6 @@ const EditTask = ({ editTodo, task }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editTodo(value, task.id);
-    toggleCloseModal();
   };
 
   return (
