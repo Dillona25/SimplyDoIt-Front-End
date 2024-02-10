@@ -37,7 +37,7 @@ const TaskModal = ({ toggleCloseModal, addTodo, handleShowMain }) => {
           <input
             type="text"
             placeholder="Task description"
-            className="w-[100%] border-b-[1px] border-b-black pb-[5px] font-[Poppins] mb-[10px]"
+            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] border-black border-[1px]"
             id="task-input"
             value={task}
             onChange={(e) => setTask(e.target.value)}

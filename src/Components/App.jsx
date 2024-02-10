@@ -16,7 +16,7 @@ uuidv4();
 import Settings from "./Settings/Settings";
 import FeedbackModal from "./FeedbackModal/FeedbackModal";
 import PasswordModal from "./PasswordModal/PasswordModal";
-import Login from "../Routes/Login/Login";
+import Profile from "./Profile/Profile";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -95,9 +95,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App max-w-[700px] m-auto">
-        <Route path="/login">
-          <Login />
-        </Route>
         <Route exact path="/">
           <Header toggleProfileModal={toggleProfileModal} />
           <Nav
@@ -138,7 +135,9 @@ function App() {
             ))}
         </Route>
         <Switch>
-          <Route path="/Profile"></Route>
+          <Route path="/Profile">
+            <Profile />
+          </Route>
           <Route path="/Settings">
             <Settings
               toggleFeedbackModal={toggleFeedbackModal}

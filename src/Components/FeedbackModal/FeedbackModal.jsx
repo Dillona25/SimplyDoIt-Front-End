@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import feedback from "../../images/feedback.svg";
 import React, { useRef } from "react";
+import { Form as ReusableForm } from "../Form/Form";
 import emailjs from "@emailjs/browser";
 
 const FeedbackModal = ({ toggleCloseModal }) => {
@@ -62,35 +63,25 @@ const FeedbackModal = ({ toggleCloseModal }) => {
           className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
           onSubmit={handleSubmit}
         >
-          <label className="font-[Poppins]">Your name</label>
-          <input
-            type="name"
-            name="user_name"
-            placeholder="Name"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
-          ></input>
-          <label className="font-[Poppins]">Your email</label>
-          <input
-            type="email"
-            name="user_email"
-            placeholder="email"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
-          ></input>
-          <label className="font-[Poppins]">Send us a message</label>
-          <textarea
-            type="message"
-            name="message"
-            placeholder="Your message"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins]"
-          ></textarea>
-          <div className="flex gap-[20px]">
-            <button
-              type="submit"
-              className="bg-black text-white font-[Poppins] px-[30px] py-[10px] rounded-md m-auto"
-            >
-              Send
-            </button>
-          </div>
+          <ReusableForm.TextInput
+            labelText={"Your Name"}
+            type={"name"}
+            name={"user_name"}
+            placeholder={"Name"}
+          ></ReusableForm.TextInput>
+          <ReusableForm.TextInput
+            labelText={"Your email"}
+            type={"email"}
+            name={"user_email"}
+            placeholder={"email"}
+          ></ReusableForm.TextInput>
+          <ReusableForm.TextArea
+            labelText={"Send us a message"}
+            type={"message"}
+            name={"message"}
+            placeholder={"Your message"}
+          ></ReusableForm.TextArea>
+          <ReusableForm.Submit buttonText={"Send"} />
         </form>
       </motion.div>
     </div>

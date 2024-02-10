@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Form } from "../Form/Form";
 
 const PasswordModal = ({ toggleCloseModal }) => {
   return (
@@ -19,28 +20,27 @@ const PasswordModal = ({ toggleCloseModal }) => {
         <h1 className="font-[Poppins] font-semibold text-[30px] mb-[10px] mt-[30px] text-center">
           Update password
         </h1>
-        <form className="flex flex-col gap-[10px] w-[300px] mt-[20px]">
-          <label className="font-[Poppins]">Current password</label>
-          <input
-            type="text"
-            placeholder="Current password"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
-          ></input>
-          <label className="font-[Poppins]">New password</label>
-          <input
-            type="text"
-            placeholder="New password"
-            className="w-[100%] bg-slate-200 p-[10px] rounded-[10px] font-[Poppins] mb-[10px]"
-          ></input>
-          <div className="flex gap-[20px]">
-            <button
-              type="submit"
-              className="bg-black text-white font-[Poppins] px-[30px] py-[10px] rounded-md m-auto"
-            >
-              Update
-            </button>
-          </div>
-        </form>
+        <Form>
+          <Form.TextInput
+            labelText={"Current Password"}
+            placeholder={"Current Password"}
+            name={"Current password"}
+            type={"password"}
+          />
+          <Form.TextInput
+            labelText={"New Password"}
+            placeholder={"New Password"}
+            name={"New password"}
+            type={"password"}
+          />
+          <Form.TextInput
+            labelText={"Repeat New Password"}
+            placeholder={"Repeat New Password"}
+            name={"Repeat New password"}
+            type={"password"}
+          />
+          <Form.Submit buttonText={"Update"} />
+        </Form>
       </motion.div>
     </div>
   );

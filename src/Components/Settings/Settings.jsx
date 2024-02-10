@@ -9,7 +9,7 @@ import info from "../../images/info.svg";
 
 const Settings = ({ toggleFeedbackModal, togglePasswordModal }) => {
   return (
-    <settings className="flex flex-col px-[30px] h-screen justify-center">
+    <div className="flex flex-col px-[30px] h-screen justify-center">
       <div>
         <h1 className="font-[Poppins] font-semibold text-[30px] text-center mt-[25px]">
           App settings
@@ -81,7 +81,7 @@ const Settings = ({ toggleFeedbackModal, togglePasswordModal }) => {
           <button className="h-[24px] w-[24px] self-center bg-home"></button>
         </Link>
       </div>
-    </settings>
+    </div>
   );
 };
 
