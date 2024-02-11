@@ -15,7 +15,7 @@ const Profile = () => {
     },
   });
   return (
-    <div className="flex flex-col gap-5 items-center align-middle p-10 h-[100vh] justify-center">
+    <div className="flex flex-col gap-5 items-center p-10 h-[100vh] justify-center">
       <h1 className="font-[Poppins] text-[40px] font-semibold">Edit Profile</h1>
       <img
         className="w-[200px] h-[200px] rounded-[50%]"
