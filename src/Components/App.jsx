@@ -143,6 +143,29 @@ function App() {
       });
   };
 
+  function handleRegistration({ email, password, name, avatar }) {
+    auth
+      .registerUser(email, password, name, avatar)
+      .then((res) => {
+        if (res) {
+          localStorage.setItem("jwt", res.token);
+          auth
+            .checkToken(res.token)
+            .then((data) => {
+              setCurrentUser(data);
+              setIsLoggedIn(true);
+              redirectToMain();
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
       <div className="App max-w-[700px] m-auto">
@@ -150,7 +173,7 @@ function App() {
           <Login onSubmit={handleLogin} />
         </Route>
         <Route path="/register">
-          <Register />
+          <Register onSubmit={handleRegistration} />
         </Route>
         <ProtectedRoute isLoggedIn={isLoggedIn} exact path="/">
           <Header toggleProfileModal={toggleProfileModal} />

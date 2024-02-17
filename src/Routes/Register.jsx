@@ -3,38 +3,38 @@ import { Link } from "react-router-dom";
 import registerImage from "../Images/registerImage.svg";
 import { useState, useEffect } from "react";
 
-export const Register = () => {
-  // const [name, setName] = useState("");
-  // const handleNameChange = (e) => {
-  //   setName(e.target.value);
-  // };
+export const Register = ({ onSubmit }) => {
+  const [name, setName] = useState("");
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
-  // const [avatar, setAvatar] = useState("");
-  // const handleAvatarChange = (e) => {
-  //   setAvatar(e.target.value);
-  // };
+  const [avatar, setAvatar] = useState("");
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.value);
+  };
 
-  // const [email, setEmail] = useState("");
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
+  const [email, setEmail] = useState("");
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-  // const [password, setPassword] = useState("");
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // };
+  const [password, setPassword] = useState("");
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-  // useEffect(() => {
-  //   setEmail("");
-  //   setPassword("");
-  //   setName("");
-  //   setAvatar("");
-  // }, []);
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setName("");
+    setAvatar("");
+  }, []);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   onSubmit({ name, avatar, email, password });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ name, avatar, email, password });
+  };
 
   return (
     <div className="flex flex-col items-center h-[100vh] justify-center px-10">
@@ -42,7 +42,7 @@ export const Register = () => {
       <h1 className="font-[Poppins] font-semibold text-[40px] mt-5 text-center">
         Register
       </h1>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.TextInput
           onChange={handleNameChange}
           labelText={"Name"}
