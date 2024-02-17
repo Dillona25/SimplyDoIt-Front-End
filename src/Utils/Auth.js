@@ -30,3 +30,19 @@ export const registerUser = (email, password, name, avatar) => {
       throw err;
     });
 };
+
+// Getting the token of the authorized user
+export const checkToken = (token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  })
+    .then(processServerResponse)
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+};

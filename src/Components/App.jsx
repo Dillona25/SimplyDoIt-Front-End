@@ -3,14 +3,14 @@ import Main from "./Main/Main";
 import Nav from "./Nav/Nav";
 import TaskModal from "./TaskModal/TaskModal";
 import Todo from "./Todo/Todo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 import EditTask from "./EditTaskModal/EditTask";
 import {
-  BrowserRouter,
   Route,
   Switch,
+  useHistory,
 } from "react-router-dom/cjs/react-router-dom.min";
 uuidv4();
 import Settings from "./Settings/Settings";
@@ -21,6 +21,7 @@ import { Login } from "../Routes/Login";
 import { Register } from "../Routes/Register";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./Contexts/CurrentUserContext";
+import * as auth from "../Utils/Auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -98,76 +99,118 @@ function App() {
     );
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if ({ token }) {
+      localStorage.setItem("jwt", token);
+      auth
+        .checkToken(token)
+        .then((res) => {
+          setIsLoggedIn(true);
+          setCurrentUser(res.data);
+        })
+        .catch((err) => {
+          console.error("error in useEffect", err);
+        });
+    }
+  }, []);
+
+  const history = useHistory();
+  const redirectToMain = () => {
+    history.push("/");
+  };
+
+  const handleLogin = ({ email, password }) => {
+    auth
+      .loginUser(email, password)
+      .then((res) => {
+        if (res) {
+          localStorage.setItem("jwt", res.token);
+          auth
+            .checkToken(res.token)
+            .then((data) => {
+              setCurrentUser(data.data);
+              setIsLoggedIn(true);
+              redirectToMain();
+            })
+            .catch((err) => {
+              console.error("Error in loginUser", err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
-    <BrowserRouter>
-      <CurrentUserContext.Provider value={{ currentUser }}>
-        <div className="App max-w-[700px] m-auto">
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <ProtectedRoute isLoggedIn={isLoggedIn} exact path="/">
-            <Header toggleProfileModal={toggleProfileModal} />
-            <Nav
-              toggleTaskModal={toggleTaskModal}
-              toggleProfileModal={toggleProfileModal}
+    <CurrentUserContext.Provider value={{ currentUser }}>
+      <div className="App max-w-[700px] m-auto">
+        <Route path="/login">
+          <Login onSubmit={handleLogin} />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <ProtectedRoute isLoggedIn={isLoggedIn} exact path="/">
+          <Header toggleProfileModal={toggleProfileModal} />
+          <Nav
+            toggleTaskModal={toggleTaskModal}
+            toggleProfileModal={toggleProfileModal}
+          />
+          {showMain && <Main />}
+          {activeModal === "taskModal" && (
+            <TaskModal
+              toggleCloseModal={toggleCloseModal}
+              addTodo={addTodo}
+              handleShowMain={handleShowMain}
             />
-            {showMain && <Main />}
-            {activeModal === "taskModal" && (
-              <TaskModal
-                toggleCloseModal={toggleCloseModal}
-                addTodo={addTodo}
-                handleShowMain={handleShowMain}
-              />
-            )}
-            <div className="max-h-[500px] overflow-auto">
-              {todos.map((todo, index) =>
-                todo.isEditing ? (
-                  <EditTask key={index} editTodo={editTask} task={todo} />
-                ) : (
-                  <Todo
-                    task={todo}
-                    key={index}
-                    toggleComplete={toggleComplete}
-                    toggleConfirmationModal={toggleConfirmationModal}
-                    editTodo={editTodo}
-                  />
-                )
-              )}
-            </div>
-            {activeModal === "confirmModal" &&
-              todos.map((todo, index) => (
-                <ConfirmationModal
+          )}
+          <div className="max-h-[500px] overflow-auto">
+            {todos.map((todo, index) =>
+              todo.isEditing ? (
+                <EditTask key={index} editTodo={editTask} task={todo} />
+              ) : (
+                <Todo
                   task={todo}
                   key={index}
-                  deleteToDo={deleteToDo}
-                  toggleCloseModal={toggleCloseModal}
+                  toggleComplete={toggleComplete}
+                  toggleConfirmationModal={toggleConfirmationModal}
+                  editTodo={editTodo}
                 />
-              ))}
+              )
+            )}
+          </div>
+          {activeModal === "confirmModal" &&
+            todos.map((todo, index) => (
+              <ConfirmationModal
+                task={todo}
+                key={index}
+                deleteToDo={deleteToDo}
+                toggleCloseModal={toggleCloseModal}
+              />
+            ))}
 
-            <Switch>
-              <Route path="/Profile">
-                <Profile />
-              </Route>
-              <Route path="/Settings">
-                <Settings
-                  toggleFeedbackModal={toggleFeedbackModal}
-                  togglePasswordModal={togglePasswordModal}
-                ></Settings>
-              </Route>
-            </Switch>
-            {activeModal === "contactModal" && (
-              <FeedbackModal toggleCloseModal={toggleCloseModal} />
-            )}
-            {activeModal === "passwordModal" && (
-              <PasswordModal toggleCloseModal={toggleCloseModal} />
-            )}
-          </ProtectedRoute>
-        </div>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
+          <Switch>
+            <Route path="/Profile">
+              <Profile />
+            </Route>
+            <Route path="/Settings">
+              <Settings
+                toggleFeedbackModal={toggleFeedbackModal}
+                togglePasswordModal={togglePasswordModal}
+              ></Settings>
+            </Route>
+          </Switch>
+          {activeModal === "contactModal" && (
+            <FeedbackModal toggleCloseModal={toggleCloseModal} />
+          )}
+          {activeModal === "passwordModal" && (
+            <PasswordModal toggleCloseModal={toggleCloseModal} />
+          )}
+        </ProtectedRoute>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

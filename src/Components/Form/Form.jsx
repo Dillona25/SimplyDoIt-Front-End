@@ -1,6 +1,9 @@
-export const Form = ({ children }) => {
+export const Form = ({ children, onSubmit }) => {
   return (
-    <form className="flex flex-col gap-[10px] w-[300px] mt-[20px]">
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col gap-[10px] w-[300px] mt-[20px]"
+    >
       {children}
     </form>
   );
