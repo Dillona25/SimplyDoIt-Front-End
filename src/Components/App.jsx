@@ -1,5 +1,4 @@
 import Header from "./Header/Header";
-import Main from "./Main/Main";
 import Nav from "./Nav/Nav";
 import TaskModal from "./TaskModal/TaskModal";
 import Todo from "./Todo/Todo";
@@ -27,7 +26,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [showMain, setShowMain] = useState(true);
   const [todos, setTodos] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
   const toggleTaskModal = () => {
@@ -181,7 +180,6 @@ function App() {
             toggleTaskModal={toggleTaskModal}
             toggleProfileModal={toggleProfileModal}
           />
-          {showMain && <Main />}
           {activeModal === "taskModal" && (
             <TaskModal
               toggleCloseModal={toggleCloseModal}
